@@ -20,9 +20,17 @@ jobs:
       - name: Show Python version
         run: python --version
       - uses: actions/checkout@v4
+      - name: Run Python
+        run: |
+          cd python
+          python main.py
   node:
     runs-on: ubuntu-latest
     steps:
       - name: Show NodeJS version
         run: node --version
       - uses: actions/checkout@v4
+      - name: Run NodeJS
+        run: |
+          cd node
+          node index.js
