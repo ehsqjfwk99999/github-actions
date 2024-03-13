@@ -1,6 +1,6 @@
 # GitHub Actions workflow example various languages
 
-   name: Languages
+name: Languages
 on:
   push:
   workflow_dispatch:
