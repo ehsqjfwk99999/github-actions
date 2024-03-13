@@ -6,8 +6,20 @@ jobs:
   golang:
     runs-on: ubuntu-latest
     steps:
-      - name: Golang version
+      - name: Show Golang version
         run: go version
       - uses: actions/checkout@v4
       - name: Run Golang
         run: cd golang && go run .
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Python version
+        run: python --version
+      - uses: actions/checkout@v4
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show NodeJS version
+        run: node --version
+      - uses: actions/checkout@v4
