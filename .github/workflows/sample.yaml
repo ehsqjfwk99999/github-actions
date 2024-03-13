@@ -1,0 +1,53 @@
+name: Sample Workflow
+on: push
+
+env:
+  WORKFLOW_ENV: workflow-env
+
+jobs:
+  sample:
+    runs-on: ubuntu-latest
+    env:
+      JOB_ENV: job-env
+      JOB_SECRET_ENV: ${{ secrets.JOB_SECRET_ENV }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Echo
+        run: echo "Hello, Github Actions!"
+      - name: Show my envs
+        env:
+          STEP_ENV: step-env
+        run: |
+          echo "WORKFLOW_ENV: $WORKFLOW_ENV"
+          echo "JOB_ENV: $JOB_ENV" ${{ env.JOB_ENV }}
+          echo "STEP_ENV: $STEP_ENV"
+          echo $GITHUB_ACTION_PATH
+          echo $GITHUB_ACTION_REPOSITORY
+          echo $GITHUB_ACTIONS
+      - name: Show default envs
+        run: |
+          echo "GITHUB_REPOSITORY: $GITHUB_REPOSITORY"
+          echo "RUNNER_OS_ARCH: ${RUNNER_OS}_${RUNNER_ARCH}"
+          echo $GITHUB_ACTION
+          echo $GITHUB_ACTIONS
+          echo $GITHUB_ACTION_PATH
+          echo $GITHUB_ACTION_REPOSITORY
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+  after-sample:
+    needs: sample
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: echo "Hello, Github Actions!"
+
+  after-after-sample:
+    needs: after-sample
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo
+        run: echo "Hello, Github Actions!"
