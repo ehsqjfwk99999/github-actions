@@ -7,5 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run golnag
+      - name: Run golang
         run: cd golang && go run .
+      - name: Run golnag
+        run: go version
