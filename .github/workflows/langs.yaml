@@ -1,6 +1,7 @@
-name: langs
-
-on: push
+name: Languages
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   golang:
@@ -10,7 +11,9 @@ jobs:
         run: go version
       - uses: actions/checkout@v4
       - name: Run Golang
-        run: cd golang && go run .
+        run: |
+          cd golang
+          go run .
   python:
     runs-on: ubuntu-latest
     steps:
